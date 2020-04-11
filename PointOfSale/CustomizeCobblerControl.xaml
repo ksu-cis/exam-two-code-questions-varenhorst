@@ -4,9 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExamTwoQuestions.PointOfSale"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:data="clr-namespace:ExamTwoCodeQuestions.Data;assembly=ExamTwoCodeQuestions.Data"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="FruitVals" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:FruitFilling"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Customize Cobbler</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock HorizontalAlignment="Center" Name="Title" FontSize="30">Customize Cobbler Order:</TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock FontSize="25">
+                Special Instructions:
+            </TextBlock>
+            <CheckBox IsChecked="{Binding Path=WithIceCream}" Checked="CheckBox_Checked">
+                With Ice Cream
+            </CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock FontSize="25">
+                Choose Fruit Filling:
+            </TextBlock>
+            <ListBox FontSize="20" ItemsSource="{Binding Source={StaticResource FruitVals}}" SelectedItem="{Binding Path=Fruit}"></ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" Margin="0,0,5,0" Text="{Binding Path=Fruit}"/>
+                <TextBlock FontSize="15" Text="Cobbler"/>
+            </StackPanel>
+            <ListView FontSize="15" ItemsSource="{Binding Path=SpecialInstructions}" />
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15">Price: </TextBlock>
+                <TextBlock FontSize="15" Margin="10,0,0,0" Text="{Binding Path=Price, StringFormat=c}"/>
+            </StackPanel>
+           
+        </StackPanel>
+        
     </Grid>
 </UserControl>

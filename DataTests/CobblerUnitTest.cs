@@ -72,5 +72,41 @@ namespace ExamTwoCodeQuestions.DataTests
             var cobbler = new Cobbler();
             Assert.IsAssignableFrom<IOrderItem>(cobbler);
         }
+
+        /// Tests for the exam start here!
+        /// VVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    
+
+        [Fact]
+        public void ImplementsIOrderItemInterface()
+        {
+            var cobbler = new Cobbler();
+            Assert.IsAssignableFrom<IOrderItem>(cobbler);
+        }
+
+        [Theory]
+        [InlineData("WithIceCream")]
+        [InlineData("Price")]
+        [InlineData("SpecialInstructions")]
+        public void CheckIfPropertyChangesWithIceCream_WithIceCream_SpecialInstructions_Price(string property)
+        {
+            var cobbler = new Cobbler();
+            Assert.PropertyChanged(cobbler, property, () =>
+            {
+                cobbler.WithIceCream = false;
+            });
+        }
+
+
+        [Theory]
+        [InlineData("Fruit")]
+        public void CheckIfPropertyChangesWithFruitFilling_FruitFilling(string property)
+        {
+            var cobbler = new Cobbler();
+            Assert.PropertyChanged(cobbler, property, () =>
+            {
+                cobbler.Fruit = FruitFilling.Blueberry;
+            });
+        }
     }
 }
