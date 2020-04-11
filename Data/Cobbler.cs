@@ -7,6 +7,9 @@ namespace ExamTwoCodeQuestions.Data
     public class Cobbler : IOrderItem, INotifyPropertyChanged
     {
 
+        /// <summary>
+        /// Property Changed Event Handler. Invoked when property change.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -62,6 +65,7 @@ namespace ExamTwoCodeQuestions.Data
         /// <summary>
         /// Gets any special instructions for preparing this dessert
         /// Since special instructinos change if there if it is with ice cream, we have to notify that this property has changed.
+        /// ^ same with price.
         /// </summary>
         public List<string> SpecialInstructions
         {
